@@ -8,11 +8,6 @@ namespace PayCalc
 {
     public class staffMember
     {
-        //public static string staffID { get; set; } = "000";
-        //public static string staffName { get; set; } = "Test";
-        //public static double annualSalary { get; set; } = 40000;
-        //public static double annualBonus { get; set; } = 5000;
-        //public static double hoursWorked { get; set; } = 1820;
 
         public static List<staffInfo> staffInfos = new List<staffInfo>()
         {
