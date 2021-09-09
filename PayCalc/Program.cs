@@ -7,7 +7,7 @@ namespace PayCalc
     {
         static void Main(string[] args)
         {
-            GenerateStaffPay();
+            GenerateStaffPay(); 
         }
 
         public static void GenerateStaffPay()
