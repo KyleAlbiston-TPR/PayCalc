@@ -32,7 +32,7 @@ namespace PayCalc
                     }
                     if (Response == "2")
                     {
-                        Console.WriteLine($"Your hourly income is: £" + hourly);
+                        Console.WriteLine($"Your hourly income is: £" + Math.Round(hourly,2));
                     }
                     if (Response == "3")
                     {
