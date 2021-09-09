@@ -12,6 +12,7 @@ namespace PayCalc
 
         public static void GenerateStaffPay()
         {
+            Console.WriteLine("TPR Pay calculator program v.1");
             Console.WriteLine(Environment.NewLine + "Enter ID: ");
             var inputID = Console.ReadLine();
             for (var i = 0; i < staffMember.staffInfos.Count; i++)
@@ -43,39 +44,3 @@ namespace PayCalc
         }
     }
 }
-
-
-//Console.Write("Enter hourly wage: ");
-//double wage = Convert.ToDouble(Console.ReadLine());
-//Console.Write("Enter hours worked: ");
-//double hours = Convert.ToDouble(Console.ReadLine());
-
-//Console.WriteLine($"Money earned today: ", wage + hours);
-
-//Console.ReadLine();
-
-//var fName = "Kyle";
-//var lName = "Albiston";
-//var annual = 15000;
-//var bonus = 950;
-
-//Console.WriteLine($"Your total " + fName + " " + lName + " is: £" + (annual + bonus));
-
-//string inputID;
-
-//Console.WriteLine("Enter staff ID: ");
-//inputID = Console.ReadLine();
-//if (inputID == staffMember.staffID)
-//{
-//    Console.WriteLine($"StaffID: " + staffMember.staffID + "\nStaff Name: " + staffMember.staffName + "\nAnnual salary: " + staffMember.annualSalary + "\nAnnual Bonus: " + staffMember.annualBonus);
-//}
-
-//staffMember info = new staffMember();
-
-//staffInfo.staffInfos 
-//    var inputID = staffMember.staffID;
-//    inputID = Console.ReadLine();
-//    if (inputID == staffMember.staffID)
-//    {
-//        Console.WriteLine($"StaffID: " + staffMember.staffID + "\nStaff Name: " + staffMember.staffName + "\nAnnual salary: " + staffMember.annualSalary + "\nAnnual Bonus: " + staffMember.annualBonus);
-//    }
