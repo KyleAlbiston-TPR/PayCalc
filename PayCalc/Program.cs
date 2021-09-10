@@ -7,12 +7,35 @@ namespace PayCalc
     {
         static void Main(string[] args)
         {
-            GenerateStaffPay(); 
+            Console.WriteLine("\t\tTPR Pay calculator program v.1");
+            Console.WriteLine("\nWhat would you like to do today? \n1: Get staff info \n2: Generate pay report \n3: Exit");
+            var selectedOption = Console.ReadLine();
+
+            switch (selectedOption)
+            {
+                case "1":
+                    generateStaffPay();
+                    break;
+                case "2":
+                    generateReport();
+                    break;
+                case "3":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Invalid option");
+                    break;
+
+            }
         }
 
-        public static void GenerateStaffPay()
+        public static void generateReport()
         {
-            Console.WriteLine("\t\tTPR Pay calculator program v.1");
+            Console.WriteLine("===> Print Report <===");
+        }
+
+        public static void generateStaffPay()
+        {
             Console.WriteLine(Environment.NewLine + "Enter ID: ");
 
             var inputID = Console.ReadLine();
