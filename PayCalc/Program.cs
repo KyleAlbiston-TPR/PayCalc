@@ -7,11 +7,10 @@ namespace PayCalc
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("\t\tTPR Pay calculator program v.1");
             bool quitApp = false;
-
             do
             {
-                Console.WriteLine("\t\tTPR Pay calculator program v.1");
                 Console.WriteLine("\nWhat would you like to do today? \n1: Get staff info \n2: Generate pay report \n3: Exit");
                 var selectedOption = Console.ReadLine();
 
@@ -36,11 +35,15 @@ namespace PayCalc
 
         public static void generateReport()
         {
-            Console.WriteLine("===> Print Report <===");
+            Console.Clear();
+            Console.WriteLine("\t\tTPR Pay calculator program v.1");
+            Console.WriteLine(Environment.NewLine + "===> Print Report <===");
         }
 
         public static void generateStaffPay()
         {
+            Console.Clear();
+            Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine(Environment.NewLine + "Enter ID: ");
 
             var inputID = Console.ReadLine();
@@ -51,6 +54,7 @@ namespace PayCalc
 
                 if (staffInfo.staffID == inputID && staffInfo.contractType == "Permanent") 
                 {
+                    Console.Clear();
                     Console.WriteLine($"Staff ID: " + staffInfo.staffID + "\nContract type: " + staffInfo.contractType + "\nStaff Name: " + staffInfo.staffName + "\nAnnual Salary: " + staffInfo.annualSalary + "\nAnnual Bonus: " + staffInfo.annualBonus + "\nHours Worked: " + staffInfo.hoursWorked);
 
                     Console.WriteLine("\nWhat would you like to do next?\n1: Calculate Total\n2: Calculate Hourly\n3: Exit");
