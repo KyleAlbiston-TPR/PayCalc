@@ -37,7 +37,19 @@ namespace PayCalc
         {
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
-            Console.WriteLine(Environment.NewLine + "===> Print Report <===");
+            for (var i = 0; i < staffMember.staffInfos.Count; i++)
+            {
+                var staffInfo = staffMember.staffInfos[i];
+
+                if (staffInfo.contractType == "Permanent")
+                {
+                    Console.WriteLine($"Staff ID: " + staffInfo.staffID + "\nContract type: " + staffInfo.contractType + "\nStaff Name: " + staffInfo.staffName + "\nAnnual Salary: " + staffInfo.annualSalary + "\nAnnual Bonus: " + staffInfo.annualBonus + "\nHours Worked: " + staffInfo.hoursWorked + "\n");
+                }
+                if (staffInfo.contractType == "Temp")
+                {
+                    Console.WriteLine($"Staff ID: " + staffInfo.staffID + "\nContract type: " + staffInfo.contractType + "\nStaff Name: " + staffInfo.staffName + "\nWeeks Worked: " + staffInfo.weeksWorked + "\nDay Rate: " + staffInfo.dayRate + "\n");
+                }
+            }
         }
 
         public static void generateStaffPay()

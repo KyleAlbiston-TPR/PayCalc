@@ -35,7 +35,8 @@ namespace PayCalc
                 contractType = "Temp",
                 staffName = "Clare Jones",
                 weeksWorked = 40,
-                dayRate = 350
+                dayRate = 350,
+
             }
         };
     }
