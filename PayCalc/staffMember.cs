@@ -36,7 +36,6 @@ namespace PayCalc
                 staffName = "Clare Jones",
                 weeksWorked = 40,
                 dayRate = 350,
-
             }
         };
     }
