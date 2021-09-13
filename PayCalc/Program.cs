@@ -37,6 +37,7 @@ namespace PayCalc
         {
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
+            Console.WriteLine();
             for (var i = 0; i < staffMember.staffInfos.Count; i++)
             {
                 var staffInfo = staffMember.staffInfos[i];
