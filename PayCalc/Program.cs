@@ -71,7 +71,7 @@ namespace PayCalc
                 {
                     Console.Clear();
                     Console.WriteLine("\t\tTPR Pay calculator program v.1");
-                    string permStaff = $"Staff ID: {staffInfo.staffID} \nContract Type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nAnnual Salary: {staffInfo.annualSalary} \nAnnual Bonus: {staffInfo.annualBonus} \nHours Worked {staffInfo.hoursWorked} \n";
+                    string permStaff = $"Staff ID: {staffInfo.staffID} \nContract Type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nAnnual Salary: {staffInfo.annualSalary} \nAnnual Bonus: {staffInfo.annualBonus} \nHours Worked: {staffInfo.hoursWorked} \n";
 
                     Console.WriteLine(Environment.NewLine + permStaff);
 
@@ -80,11 +80,11 @@ namespace PayCalc
                     double hourly = staffInfo.annualSalary / staffInfo.hoursWorked;
                     if (Response == "1")
                     {
-                        Console.WriteLine($"Your total income this year is: £" + (staffInfo.annualSalary + staffInfo.annualBonus));
+                        Console.WriteLine($"\nYour total income this year is: £" + (staffInfo.annualSalary + staffInfo.annualBonus));
                     }
                     if (Response == "2")
                     {
-                        Console.WriteLine($"Your hourly income is: £" + Math.Round(hourly,2));
+                        Console.WriteLine($"\nYour hourly income is: £" + Math.Round(hourly,2));
                     }
                     if (Response == "3")
                     {
@@ -104,11 +104,11 @@ namespace PayCalc
                     double tempHourly = staffInfo.dayRate / 7;
                     if (Response == "1")
                     {
-                        Console.WriteLine($"Your total income this year is: £" + ((staffInfo.dayRate * 5) * staffInfo.weeksWorked));
+                        Console.WriteLine($"\nYour total income this year is: £" + ((staffInfo.dayRate * 5) * staffInfo.weeksWorked));
                     }
                     if (Response == "2")
                     {
-                        Console.WriteLine($"Your hourly income is: £" + Math.Round(tempHourly, 2));
+                        Console.WriteLine($"\nYour hourly income is: £" + Math.Round(tempHourly, 2));
                     }
                     if (Response == "3")
                     {
