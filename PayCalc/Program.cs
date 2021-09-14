@@ -44,7 +44,7 @@ namespace PayCalc
 
                 if (staffInfo.contractType == "Permanent")
                 {
-                    string permStaff = $"Staff ID: {staffInfo.staffID} \nContract Type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nAnnual Salary: {staffInfo.annualSalary} \nAnnual Bonus: {staffInfo.annualBonus} \nHours Worked {staffInfo.hoursWorked} \n";
+                    string permStaff = $"Staff ID: {staffInfo.staffID} \nContract Type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nAnnual Salary: {staffInfo.annualSalary} \nAnnual Bonus: {staffInfo.annualBonus} \nHours Worked: {staffInfo.hoursWorked} \n";
                     Console.WriteLine(permStaff);
                 }
                 if (staffInfo.contractType == "Temp")
