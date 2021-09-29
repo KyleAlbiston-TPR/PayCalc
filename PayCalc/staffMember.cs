@@ -28,14 +28,6 @@ namespace PayCalc
                 annualSalary = 45000,
                 annualBonus = 2500,
                 hoursWorked = 1820
-            },
-            new staffInfo()
-            { 
-                staffID = "003",
-                contractType = "Temp",
-                staffName = "Clare Jones",
-                weeksWorked = 40,
-                dayRate = 350,
             }
         };
     }
