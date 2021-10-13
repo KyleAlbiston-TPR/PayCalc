@@ -4,6 +4,8 @@
     {
         public int weeksWorked { get; set; }
         public double dayRate { get; set; }
-        public string contractType { get; set; }
+        public staffInfo.contractType contract { get; internal set; }
+
+        public enum contractType { Permanent, Temporary, Contract }
     }
 }
