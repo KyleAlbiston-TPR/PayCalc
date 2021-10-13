@@ -13,7 +13,7 @@ namespace PayCalc
             new tempStaffInfo()
             {
                 staffID = "003",
-                contract = staffInfo.contractType.Temporary,
+                contract = ContractType.contractType.Temporary,
                 staffName = "Clare Jones",
                 weeksWorked = 40,
                 dayRate = 350,

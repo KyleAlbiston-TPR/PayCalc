@@ -14,7 +14,7 @@ namespace PayCalc
             new staffInfo()
             {
                 staffID = "001",
-                contract = staffInfo.contractType.Permanent,
+                contract = ContractType.contractType.Permanent,
                 staffName = "Joe Bloggs",
                 annualSalary = 40000,
                 annualBonus = 5000,
@@ -23,7 +23,7 @@ namespace PayCalc
             new staffInfo()
             { 
                 staffID = "002",
-                contract = staffInfo.contractType.Permanent,
+                contract = ContractType.contractType.Permanent,
                 staffName = "John Smith",
                 annualSalary = 45000,
                 annualBonus = 2500,
