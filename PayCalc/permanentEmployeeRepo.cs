@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    public abstract class PersonalInfo
+    class permanentEmployeeRepo
     {
-        public string StaffID { get; set; }
-        public string StaffName { get; set; }
     }
 }

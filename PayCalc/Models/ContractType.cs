@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    abstract public class ContractType
+    public abstract class ContractType
     {
-        public contractType contract { get; internal set; }
+        public contractType Contract { get; internal set; }
         public enum contractType { Permanent, Temporary, Contract }
     }
 }

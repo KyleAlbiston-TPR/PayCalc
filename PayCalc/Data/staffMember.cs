@@ -6,28 +6,28 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    public class staffMember
+    public class StaffMember
     {
 
-        public static List<staffInfo> staffInfos = new List<staffInfo>()
+        public static List<StaffInfo> staffInfos = new()
         {
-            new staffInfo()
+            new StaffInfo()
             {
-                staffID = "001",
-                contract = ContractType.contractType.Permanent,
-                staffName = "Joe Bloggs",
-                annualSalary = 40000,
-                annualBonus = 5000,
-                hoursWorked = 1820
+                StaffID = "001",
+                Contract = ContractType.contractType.Permanent,
+                StaffName = "Joe Bloggs",
+                AnnualSalary = 40000,
+                AnnualBonus = 5000,
+                HoursWorked = 1820
             },
-            new staffInfo()
+            new StaffInfo()
             { 
-                staffID = "002",
-                contract = ContractType.contractType.Permanent,
-                staffName = "John Smith",
-                annualSalary = 45000,
-                annualBonus = 2500,
-                hoursWorked = 1820
+                StaffID = "002",
+                Contract = ContractType.contractType.Permanent,
+                StaffName = "John Smith",
+                AnnualSalary = 45000,
+                AnnualBonus = 2500,
+                HoursWorked = 1820
             }
         };
     }

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    public class tempStaffMember
+    public class TempStaffMember : ContractType
     {
-        public static List<tempStaffInfo> tempStaffInfos = new List<tempStaffInfo>()
+        public static List<TempStaffInfo> tempStaffInfos = new()
         {
-            new tempStaffInfo()
+            new TempStaffInfo()
             {
-                staffID = "003",
-                contract = ContractType.contractType.Temporary,
-                staffName = "Clare Jones",
-                weeksWorked = 40,
-                dayRate = 350,
+                StaffID = "003",
+                Contract = ContractType.contractType.Temporary,
+                StaffName = "Clare Jones",
+                WeeksWorked = 40,
+                DayRate = 350,
             }
         };
     }

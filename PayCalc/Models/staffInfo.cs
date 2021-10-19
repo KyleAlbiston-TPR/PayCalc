@@ -1,10 +1,10 @@
 ﻿namespace PayCalc
 {
-    public class staffInfo : personalInfo
+    public class StaffInfo : PersonalInfo
     {
-        public double annualSalary { get; set; }
-        public double annualBonus { get; set; }
-        public double hoursWorked { get; set; }
-        public ContractType.contractType contract { get; internal set; }
+        public double AnnualSalary { get; set; }
+        public double AnnualBonus { get; set; }
+        public double HoursWorked { get; set; }
+        public ContractType.contractType Contract { get; internal set; }
     }
 }

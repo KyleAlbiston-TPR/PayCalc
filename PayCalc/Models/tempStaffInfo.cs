@@ -1,9 +1,9 @@
 ﻿namespace PayCalc
 {
-    public class tempStaffInfo : personalInfo
+    public class TempStaffInfo : PersonalInfo
     {
-        public int weeksWorked { get; set; }
-        public double dayRate { get; set; }
-        public ContractType.contractType contract { get; internal set; }
+        public int WeeksWorked { get; set; }
+        public double DayRate { get; set; }
+        public ContractType.contractType Contract { get; internal set; }
     }
 }
