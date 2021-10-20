@@ -38,19 +38,19 @@ namespace PayCalc
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine();
-            for (var i = 0; i < staffMember.staffInfos.Count; i++)
+            for (var i = 0; i < StaffMember.staffInfos.Count; i++)
             {
-                var staffInfo = staffMember.staffInfos[i];
+                var staffInfo = StaffMember.staffInfos[i];
                 {
-                    string permStaff = $"Staff ID: {staffInfo.staffID} \nContract Type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nAnnual Salary: {staffInfo.annualSalary} \nAnnual Bonus: {staffInfo.annualBonus} \nHours Worked: {staffInfo.hoursWorked} \n";
+                    string permStaff = $"Staff ID: {staffInfo.StaffID} \nContract Type: {ContractType.Permanent} \nStaff Name: {staffInfo.StaffName} \nAnnual Salary: {staffInfo.AnnualSalary} \nAnnual Bonus: {staffInfo.AnnualBonus} \nHours Worked: {staffInfo.HoursWorked} \n";
                     Console.WriteLine(permStaff);
                 }
             }
-            for (var i = 0; i < tempStaffMember.tempStaffInfos.Count; i++)
+            for (var i = 0; i < TempStaffMember.tempStaffInfos.Count; i++)
             {
-                var staffInfo = tempStaffMember.tempStaffInfos[i];
+                var staffInfo = TempStaffMember.tempStaffInfos[i];
                 {
-                    string tempStaff = $"Staff ID: {staffInfo.staffID} \nContract type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nWeeks Worked: {staffInfo.weeksWorked} \nDay Rate: {staffInfo.dayRate} \n";
+                    string tempStaff = $"Staff ID: {staffInfo.StaffID} \nContract type: {ContractType.Temporary} \nStaff Name: {staffInfo.StaffName} \nWeeks Worked: {staffInfo.WeeksWorked} \nDay Rate: {staffInfo.DayRate} \n";
                     Console.WriteLine(tempStaff);
                 }
             }
@@ -64,24 +64,24 @@ namespace PayCalc
 
             var inputID = Console.ReadLine();
 
-            for (var i = 0; i < staffMember.staffInfos.Count; i++)
+            for (var i = 0; i < StaffMember.staffInfos.Count; i++)
             {
-                var staffInfo = staffMember.staffInfos[i];
+                var staffInfo = StaffMember.staffInfos[i];
 
-                if (staffInfo.staffID == inputID) 
+                if (staffInfo.StaffID == inputID) 
                 {
                     Console.Clear();
                     Console.WriteLine("\t\tTPR Pay calculator program v.1");
-                    string permStaff = $"Staff ID: {staffInfo.staffID} \nContract Type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nAnnual Salary: {staffInfo.annualSalary} \nAnnual Bonus: {staffInfo.annualBonus} \nHours Worked: {staffInfo.hoursWorked} \n";
+                    string permStaff = $"Staff ID: {staffInfo.StaffID} \nContract Type: {ContractType.Permanent} \nStaff Name: {staffInfo.StaffName} \nAnnual Salary: {staffInfo.AnnualSalary} \nAnnual Bonus: {staffInfo.AnnualBonus} \nHours Worked: {staffInfo.HoursWorked} \n";
 
                     Console.WriteLine(Environment.NewLine + permStaff);
 
                     Console.WriteLine("\nWhat would you like to do next?\n1: Calculate Total\n2: Calculate Hourly\n3: Exit");
                     var Response = Console.ReadLine();
-                    double hourly = staffInfo.annualSalary / staffInfo.hoursWorked;
+                    double hourly = staffInfo.AnnualSalary / staffInfo.HoursWorked;
                     if (Response == "1")
                     {
-                        Console.WriteLine($"\nYour total income this year is: £" + (staffInfo.annualSalary + staffInfo.annualBonus));
+                        Console.WriteLine($"\nYour total income this year is: £" + (staffInfo.AnnualSalary + staffInfo.AnnualBonus));
                     }
                     if (Response == "2")
                     {
@@ -94,23 +94,23 @@ namespace PayCalc
                 }
             }
             
-            for (var i = 0; i < tempStaffMember.tempStaffInfos.Count; i++)
+            for (var i = 0; i < TempStaffMember.tempStaffInfos.Count; i++)
             {
-                var staffInfo = tempStaffMember.tempStaffInfos[i];
+                var staffInfo = TempStaffMember.tempStaffInfos[i];
 
-                if (staffInfo.staffID == inputID)
+                if (staffInfo.StaffID == inputID)
                 {
                     Console.Clear();
                     Console.WriteLine("\t\tTPR Pay calculator program v.1");
-                    string tempStaff = $"Staff ID: {staffInfo.staffID} \nContract type: {staffInfo.contractType} \nStaff Name: {staffInfo.staffName} \nWeeks Worked: {staffInfo.weeksWorked} \nDay Rate: {staffInfo.dayRate} \n";
+                    string tempStaff = $"Staff ID: {staffInfo.StaffID} \nContract type: {ContractType.Temporary} \nStaff Name: {staffInfo.StaffName} \nWeeks Worked: {staffInfo.WeeksWorked} \nDay Rate: {staffInfo.DayRate} \n";
                     Console.WriteLine(Environment.NewLine + tempStaff);
 
                     Console.WriteLine("\nWhat would you like to do next?\n1: Calculate Total\n2: Calculate Hourly\n3: Exit");
                     var Response = Console.ReadLine();
-                    double tempHourly = staffInfo.dayRate / 7;
+                    double tempHourly = staffInfo.DayRate / 7;
                     if (Response == "1")
                     {
-                        Console.WriteLine($"\nYour total income this year is: £" + ((staffInfo.dayRate * 5) * staffInfo.weeksWorked));
+                        Console.WriteLine($"\nYour total income this year is: £" + ((staffInfo.DayRate * 5) * staffInfo.WeeksWorked));
                     }
                     if (Response == "2")
                     {
