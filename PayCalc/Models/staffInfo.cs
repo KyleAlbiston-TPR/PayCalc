@@ -5,6 +5,5 @@
         public double AnnualSalary { get; set; }
         public double AnnualBonus { get; set; }
         public double HoursWorked { get; set; }
-        public ContractType.contractType Contract { get; internal set; }
     }
 }

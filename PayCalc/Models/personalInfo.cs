@@ -10,5 +10,6 @@ namespace PayCalc
     {
         public string StaffID { get; set; }
         public string StaffName { get; set; }
+        public ContractType Contract { get; internal set; }
     }
 }

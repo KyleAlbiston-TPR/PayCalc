@@ -42,7 +42,7 @@ namespace PayCalc
             {
                 var staffInfo = StaffMember.staffInfos[i];
                 {
-                    string permStaff = $"Staff ID: {staffInfo.StaffID} \nContract Type: {ContractType.contractType.Permanent} \nStaff Name: {staffInfo.StaffName} \nAnnual Salary: {staffInfo.AnnualSalary} \nAnnual Bonus: {staffInfo.AnnualBonus} \nHours Worked: {staffInfo.HoursWorked} \n";
+                    string permStaff = $"Staff ID: {staffInfo.StaffID} \nContract Type: {ContractType.Permanent} \nStaff Name: {staffInfo.StaffName} \nAnnual Salary: {staffInfo.AnnualSalary} \nAnnual Bonus: {staffInfo.AnnualBonus} \nHours Worked: {staffInfo.HoursWorked} \n";
                     Console.WriteLine(permStaff);
                 }
             }
@@ -50,7 +50,7 @@ namespace PayCalc
             {
                 var staffInfo = TempStaffMember.tempStaffInfos[i];
                 {
-                    string tempStaff = $"Staff ID: {staffInfo.StaffID} \nContract type: {ContractType.contractType.Temporary} \nStaff Name: {staffInfo.StaffName} \nWeeks Worked: {staffInfo.WeeksWorked} \nDay Rate: {staffInfo.DayRate} \n";
+                    string tempStaff = $"Staff ID: {staffInfo.StaffID} \nContract type: {ContractType.Temporary} \nStaff Name: {staffInfo.StaffName} \nWeeks Worked: {staffInfo.WeeksWorked} \nDay Rate: {staffInfo.DayRate} \n";
                     Console.WriteLine(tempStaff);
                 }
             }
@@ -72,7 +72,7 @@ namespace PayCalc
                 {
                     Console.Clear();
                     Console.WriteLine("\t\tTPR Pay calculator program v.1");
-                    string permStaff = $"Staff ID: {staffInfo.StaffID} \nContract Type: {ContractType.contractType.Permanent} \nStaff Name: {staffInfo.StaffName} \nAnnual Salary: {staffInfo.AnnualSalary} \nAnnual Bonus: {staffInfo.AnnualBonus} \nHours Worked: {staffInfo.HoursWorked} \n";
+                    string permStaff = $"Staff ID: {staffInfo.StaffID} \nContract Type: {ContractType.Permanent} \nStaff Name: {staffInfo.StaffName} \nAnnual Salary: {staffInfo.AnnualSalary} \nAnnual Bonus: {staffInfo.AnnualBonus} \nHours Worked: {staffInfo.HoursWorked} \n";
 
                     Console.WriteLine(Environment.NewLine + permStaff);
 
@@ -102,7 +102,7 @@ namespace PayCalc
                 {
                     Console.Clear();
                     Console.WriteLine("\t\tTPR Pay calculator program v.1");
-                    string tempStaff = $"Staff ID: {staffInfo.StaffID} \nContract type: {ContractType.contractType.Temporary} \nStaff Name: {staffInfo.StaffName} \nWeeks Worked: {staffInfo.WeeksWorked} \nDay Rate: {staffInfo.DayRate} \n";
+                    string tempStaff = $"Staff ID: {staffInfo.StaffID} \nContract type: {ContractType.Temporary} \nStaff Name: {staffInfo.StaffName} \nWeeks Worked: {staffInfo.WeeksWorked} \nDay Rate: {staffInfo.DayRate} \n";
                     Console.WriteLine(Environment.NewLine + tempStaff);
 
                     Console.WriteLine("\nWhat would you like to do next?\n1: Calculate Total\n2: Calculate Hourly\n3: Exit");
