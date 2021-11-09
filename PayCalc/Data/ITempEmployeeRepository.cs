@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    class ITempEmployeeRepository
+    public interface ITempEmployeeRepository
     {
-        //maybe use idk yet
+        IEnumerable<TempEmployee> GetAll();
     }
 }

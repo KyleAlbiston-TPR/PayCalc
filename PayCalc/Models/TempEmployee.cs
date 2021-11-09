@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    class TempEmployee
+    public class TempEmployee : PersonalInfo
     {
-        ////holds temp emp info
-        //public decimal DayRate { get; set; }
-        //public int WeeksWorked { get; set; }
+        public decimal DayRate { get; set; }
+        public int WeeksWorked { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {Id} \nName: {Name} \nContract: {Contract} \nDayRate: {DayRate} \nWeeksWorked: {WeeksWorked} \n";
+        }
     }
 }

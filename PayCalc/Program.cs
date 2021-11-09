@@ -6,6 +6,7 @@ namespace PayCalc
 {
     class Program
     {
+        private static TempEmployeeRepository temp = new TempEmployeeRepository();
         private static MockEmployeeRepository mock = new MockEmployeeRepository();
 
         static void Main(string[] args)
@@ -51,11 +52,7 @@ namespace PayCalc
             employee.Name = Console.ReadLine();
             //if statement for emp contract type
             Console.WriteLine("Enter a contract type \t Permanent -- Temporary: ");
-            employee.ContractType = Console.ReadLine();
-            Console.WriteLine("Enter Day rate: ");
-            employee.DayRate = Convert.ToDecimal(Console.ReadLine());
-            Console.WriteLine("Enter weeks hired for: ");
-            employee.WeeksWorked = Convert.ToInt32(Console.ReadLine()); 
+            employee.Contract = Console.ReadLine();
             Console.WriteLine("Annual Salary: ");
             employee.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
             Console.WriteLine("Annual Bonus: ");
@@ -63,7 +60,7 @@ namespace PayCalc
             Console.WriteLine("Hours Worked: ");
             employee.HoursWorked = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("\n \tNew Employee Data: \n");
-            Console.WriteLine(string.Concat(mock.Create(Id: employee.Id, Name: employee.Name, ContractType: employee.ContractType, DayRate: employee.DayRate, WeeksWorked: employee.WeeksWorked, AnnualSalary: employee.AnnualSalary, AnnualBonus: employee.AnnualBonus, HoursWorked: employee.HoursWorked)));
+            Console.WriteLine(string.Concat(mock.Create(Id: employee.Id, Name: employee.Name, Contract: employee.Contract, AnnualSalary: employee.AnnualSalary, AnnualBonus: employee.AnnualBonus, HoursWorked: employee.HoursWorked)));
             //need a repo class for temp emp, however use the same interface 
         }
 
@@ -73,9 +70,10 @@ namespace PayCalc
             
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
-            Console.WriteLine("\n \tEmployee Data: \n");
-            Console.WriteLine(string.Concat(mock.GetAll()));           
-            
+            Console.WriteLine("\n-----------------------Permanent Staff-----------------------\n");
+            Console.WriteLine(string.Concat(mock.GetAll()));
+            Console.WriteLine("\n-----------------------Temporary Staff-----------------------\n");
+            Console.WriteLine(string.Concat(temp.GetAll()));
         }
 
         public static void generateStaffPay()

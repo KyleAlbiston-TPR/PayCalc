@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PayCalc
-{
-    class PersonalInfo
     {
-        //// holds id and name and contract
-        //public int Id { get; set; }
-        //public string Name { get; set; }
+        public abstract class PersonalInfo
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Contract { get; set; }
+        }
     }
-}

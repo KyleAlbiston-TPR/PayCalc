@@ -15,22 +15,20 @@ namespace localPayCalc
             _EmployeeList = new List<Employee>()
             {
                 new Employee()
-                { Id = 1, Name = "Kyle Albiston", AnnualSalary = 15000, AnnualBonus = 4000, HoursWorked = 1820 },
+                { Id = 1, Name = "Kyle Albiston", Contract = "Permanent" , AnnualSalary = 15000, AnnualBonus = 4000, HoursWorked = 1820 },
                 new Employee()
-                { Id = 2, Name = "Mark Hammerson", AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
+                { Id = 2, Name = "Mark Hammerson", Contract = "Permanent", AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
             };
 
         }
 
-        public Employee Create(int Id, string Name, string ContractType, decimal? DayRate, int? WeeksWorked, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
+        public Employee Create(int Id, string Name, string Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
         {
             var createNew = new Employee()
             {
                 Id = Id,
                 Name = Name,
-                ContractType = ContractType,
-                DayRate = (decimal)DayRate,
-                WeeksWorked = (int)WeeksWorked,
+                Contract = Contract,
                 AnnualSalary = AnnualSalary,
                 AnnualBonus = AnnualBonus,
                 HoursWorked = HoursWorked,
