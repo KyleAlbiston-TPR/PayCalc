@@ -9,5 +9,10 @@ namespace PayCalc
     public interface ITempEmployeeRepository
     {
         IEnumerable<TempEmployee> GetAll();
+
+        TempEmployee Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate);
+
+        TempEmployee GetEmployee(int Id);
+
     }
 }
