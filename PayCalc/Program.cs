@@ -50,8 +50,6 @@ namespace PayCalc
             Console.WriteLine("Staff Name: ");
             employee.Name = Console.ReadLine();
             //if statement for emp contract type
-            //if contract type = perm ask for sal bonus and hours - return string with those values
-            //if contract type = temp/contract ask for rate and weeks - return string with id contract name rate weeks
             Console.WriteLine("Enter a contract type \t Permanent -- Temporary: ");
             employee.ContractType = Console.ReadLine();
             Console.WriteLine("Enter Day rate: ");
@@ -66,7 +64,7 @@ namespace PayCalc
             employee.HoursWorked = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("\n \tNew Employee Data: \n");
             Console.WriteLine(string.Concat(mock.Create(Id: employee.Id, Name: employee.Name, ContractType: employee.ContractType, DayRate: employee.DayRate, WeeksWorked: employee.WeeksWorked, AnnualSalary: employee.AnnualSalary, AnnualBonus: employee.AnnualBonus, HoursWorked: employee.HoursWorked)));
-            //maybe? add new mock.createTemp. test without it first and see from there what needs to be done
+            //need a repo class for temp emp, however use the same interface 
         }
 
         public static void generateReport()

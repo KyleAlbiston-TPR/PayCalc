@@ -18,7 +18,7 @@ namespace localPayCalc
                 { Id = 1, Name = "Kyle Albiston", AnnualSalary = 15000, AnnualBonus = 4000, HoursWorked = 1820 },
                 new Employee()
                 { Id = 2, Name = "Mark Hammerson", AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
-            }; //currently shows all information regardless of contract type
+            };
 
         }
 
