@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    class TempEmployeeRepository : ITempEmployeeRepository
+    class TempEmployeeRepository : IEmployeeRepository<TempEmployee>
     {
         public List<TempEmployee> _TempEmployees;
         public TempEmployeeRepository()
@@ -18,18 +18,33 @@ namespace PayCalc
             };
         }
 
-        public TempEmployee Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate)
+        public TempEmployee Create(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Create(int Id, string Name, string Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate)
         {
             var createNew = new TempEmployee()
             {
                 Id = Id,
                 Name = Name,
                 Contract = Contract,
-                WeeksWorked = WeeksWorked,
-                DayRate = DayRate,
+                WeeksWorked = (int)WeeksWorked,
+                DayRate = (decimal)DayRate,
             };
             _TempEmployees.Add(createNew);
             return createNew;
+        }
+
+        public bool Delete(int Id)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<TempEmployee> GetAll()
@@ -40,6 +55,11 @@ namespace PayCalc
         public TempEmployee GetEmployee(int Id)
         {
             return _TempEmployees.FirstOrDefault(e => e.Id == Id);
+        }
+
+        public TempEmployee Update(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

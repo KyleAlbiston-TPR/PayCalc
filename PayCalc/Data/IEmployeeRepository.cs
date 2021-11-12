@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace localPayCalc
-{
-    public interface IEmployeeRepository
+namespace PayCalc
+{ //turn into main interface using generic type <T>
+    public interface IEmployeeRepository<T>
     {
-        Employee GetEmployee(int Id);
-        IEnumerable<Employee> GetAll();
+        T GetEmployee(int Id); //Employee becomes T  
+        IEnumerable<T> GetAll();
 
-        Employee Create(int Id, string Name, string Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked);
+        T Create(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate);
         bool Delete(int Id);
-
-        Employee Update(int Id, string Name, string ContractType, decimal? DayRate, int? WeeksWorked, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked);
+        T Update(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate);
+        object Create(int Id, string Name, string Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked);
+        object Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate);
     }
 }

@@ -1,13 +1,13 @@
-﻿using localPayCalc;
-using System;
+﻿using System;
 using System.Linq;
 
 namespace PayCalc
 {
     class Program
     {
-        private static TempEmployeeRepository temp = new TempEmployeeRepository();
-        private static MockEmployeeRepository mock = new MockEmployeeRepository();
+        private static IEmployeeRepository<TempEmployee> Temp = new TempEmployeeRepository();
+        private static IEmployeeRepository<PermantentEmployee> Perm = new MockEmployeeRepository();
+        //main interface employeerepo <one perm and one for temp> perm / temp = new "Repo" go here
 
         static void Main(string[] args)
         {
@@ -50,7 +50,7 @@ namespace PayCalc
             var Contract = Console.ReadLine();
             if (Contract == "P" || Contract == "p")
             {
-                Employee employee = new Employee();
+                PermantentEmployee employee = new PermantentEmployee();
                 Console.WriteLine("Staff ID: ");
                 employee.Id = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Staff Name: ");
@@ -64,7 +64,7 @@ namespace PayCalc
                 employee.HoursWorked = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 Console.WriteLine("\n \tNew Employee Data: \n");
-                Console.WriteLine(string.Concat(mock.Create(Id: employee.Id, Name: employee.Name, Contract: employee.Contract, AnnualSalary: employee.AnnualSalary, AnnualBonus: employee.AnnualBonus, HoursWorked: employee.HoursWorked)));
+                Console.WriteLine(string.Concat(Perm.Create(Id: employee.Id, Name: employee.Name, Contract: employee.Contract, AnnualSalary: employee.AnnualSalary, AnnualBonus: employee.AnnualBonus, HoursWorked: employee.HoursWorked)));
             }
             else if (Contract == "T" || Contract == "t")
             {
@@ -80,7 +80,7 @@ namespace PayCalc
                 tempEmployee.DayRate = Convert.ToDecimal(Console.ReadLine());
                 Console.Clear();
                 Console.WriteLine("\n \tNew Employee Data: \n");
-                Console.WriteLine(string.Concat(temp.Create(Id: tempEmployee.Id, Name: tempEmployee.Name, Contract: tempEmployee.Contract, WeeksWorked: tempEmployee.WeeksWorked, DayRate: tempEmployee.DayRate)));
+                Console.WriteLine(string.Concat(Temp.Create(Id: tempEmployee.Id, Name: tempEmployee.Name, Contract: tempEmployee.Contract, WeeksWorked: tempEmployee.WeeksWorked, DayRate: tempEmployee.DayRate)));
 
             }
             else { Console.WriteLine("Invalid Input");}
@@ -90,14 +90,14 @@ namespace PayCalc
 
         public static void generateReport()
         {
-            Employee employee = new Employee();
+            PermantentEmployee employee = new PermantentEmployee();
             
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine("\n-----------------------Permanent Staff-----------------------\n");
-            Console.WriteLine(string.Concat(mock.GetAll()));
+            Console.WriteLine(string.Concat(Perm.GetAll()));
             Console.WriteLine("\n-----------------------Temporary Staff-----------------------\n");
-            Console.WriteLine(string.Concat(temp.GetAll()));
+            Console.WriteLine(string.Concat(Temp.GetAll()));
         }
 
         public static void generateStaffPay()
@@ -106,8 +106,8 @@ namespace PayCalc
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine(Environment.NewLine + "Enter ID: ");
             int inputID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(string.Concat(mock.GetEmployee(inputID)));
-            Console.WriteLine(string.Concat(temp.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(Temp.GetEmployee(inputID)));
 
             Console.WriteLine("\nWhat would you like to do next? \n1: Calculate Total \n2: Calculate hourly wage \n3: Exit");
             var Response = Console.ReadLine();

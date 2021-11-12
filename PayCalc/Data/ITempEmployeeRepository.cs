@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Threading.Tasks;
 
-namespace PayCalc
-{
-    public interface ITempEmployeeRepository
-    {
-        IEnumerable<TempEmployee> GetAll();
+//namespace PayCalc
+//{ //remove
+//    public interface ITempEmployeeRepository
+//    {
+//        IEnumerable<TempEmployee> GetAll();
 
-        TempEmployee Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate);
+//        TempEmployee Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate);
 
-        TempEmployee GetEmployee(int Id);
+//        TempEmployee GetEmployee(int Id);
 
-    }
-}
+//    }
+//}
+
+////remove

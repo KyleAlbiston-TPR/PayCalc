@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using PayCalc;
 
-namespace localPayCalc
+namespace PayCalc
 {
-    public class Employee : PersonalInfo
+    public class PermantentEmployee : PersonalInfo
     {
         public decimal AnnualSalary { get; set; }
         public decimal AnnualBonus { get; set; }
