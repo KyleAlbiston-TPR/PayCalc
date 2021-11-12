@@ -8,7 +8,6 @@ namespace PayCalc
 {
     class ContractType
     {
-        //holds contract type as enum MAYBE
-        //idk if i want this in or not yet
+        //add enum
     }
 }

@@ -7,7 +7,6 @@ namespace PayCalc
     {
         private static IEmployeeRepository<TempEmployee> Temp = new TempEmployeeRepository();
         private static IEmployeeRepository<PermantentEmployee> Perm = new MockEmployeeRepository();
-        //main interface employeerepo <one perm and one for temp> perm / temp = new "Repo" go here
 
         static void Main(string[] args)
         {
@@ -45,7 +44,6 @@ namespace PayCalc
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine("\n\tEmployee Data Entry");
-            //if statement for emp contract type
             Console.WriteLine("Enter a contract type \t P = Permanent \n\t\t\t T = Temporary");
             var Contract = Console.ReadLine();
             if (Contract == "P" || Contract == "p")
@@ -84,7 +82,6 @@ namespace PayCalc
 
             }
             else { Console.WriteLine("Invalid Input");}
-            //if --- temp
 
         }
 

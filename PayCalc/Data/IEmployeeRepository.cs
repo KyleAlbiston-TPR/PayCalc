@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace PayCalc
-{ //turn into main interface using generic type <T>
+{
     public interface IEmployeeRepository<T>
     {
-        T GetEmployee(int Id); //Employee becomes T  
+        T GetEmployee(int Id);
         IEnumerable<T> GetAll();
 
         T Create(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate);

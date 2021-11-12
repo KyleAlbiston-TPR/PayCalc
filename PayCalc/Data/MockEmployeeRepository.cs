@@ -25,17 +25,6 @@ namespace PayCalc
         public PermantentEmployee Create(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
         {
             throw new NotImplementedException();
-            //var createNew = new PermantentEmployee()
-            //{
-            //    Id = Id,
-            //    Name = Name,
-            //    Contract = Contract,
-            //    AnnualSalary = (decimal)AnnualSalary,
-            //    AnnualBonus = (decimal)AnnualBonus,
-            //    HoursWorked = (int)HoursWorked,
-            //};
-            //_EmployeeList.Add(createNew);
-            //return createNew;
         }
 
         public object Create(int Id, string Name, string Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
