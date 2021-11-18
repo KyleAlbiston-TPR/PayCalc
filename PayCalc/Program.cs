@@ -53,7 +53,7 @@ namespace PayCalc
                 employee.Id = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Staff Name: ");
                 employee.Name = Console.ReadLine();
-                employee.Contract = "Permanent";
+                employee.Contract = ContractType.Permanent;
                 Console.WriteLine("Annual Salary: ");
                 employee.AnnualSalary = Convert.ToDecimal(Console.ReadLine());
                 Console.WriteLine("Annual Bonus: ");
@@ -62,7 +62,7 @@ namespace PayCalc
                 employee.HoursWorked = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
                 Console.WriteLine("\n \tNew Employee Data: \n");
-                Console.WriteLine(string.Concat(Perm.Create(Id: employee.Id, Name: employee.Name, Contract: employee.Contract, AnnualSalary: employee.AnnualSalary, AnnualBonus: employee.AnnualBonus, HoursWorked: employee.HoursWorked)));
+                Console.WriteLine(string.Concat(Perm.Create(employee.Id,employee.Name,employee.Contract, employee.AnnualSalary, employee.AnnualBonus,  employee.HoursWorked)));
             }
             else if (Contract == "T" || Contract == "t")
             {
@@ -71,7 +71,7 @@ namespace PayCalc
                 tempEmployee.Id = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Staff Name: ");
                 tempEmployee.Name = Console.ReadLine();
-                tempEmployee.Contract = "Temporary";
+                tempEmployee.Contract = ContractType.Temporary;
                 Console.WriteLine("Weeks Worked: ");
                 tempEmployee.WeeksWorked = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Day Rate: ");

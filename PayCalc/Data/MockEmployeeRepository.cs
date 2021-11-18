@@ -15,25 +15,25 @@ namespace PayCalc
             _EmployeeList = new List<PermantentEmployee>()
             {
                 new PermantentEmployee()
-                { Id = 1, Name = "Kyle Albiston", Contract = "Permanent" , AnnualSalary = 15000, AnnualBonus = 4000, HoursWorked = 1820 },
+                { Id = 1, Name = "Kyle Albiston", Contract = ContractType.Permanent , AnnualSalary = 15000, AnnualBonus = 4000, HoursWorked = 1820 },
                 new PermantentEmployee()
-                { Id = 2, Name = "Mark Hammerson", Contract = "Permanent", AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
+                { Id = 2, Name = "Mark Hammerson", Contract = ContractType.Permanent, AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
             };
 
         }
 
-        public PermantentEmployee Create(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public PermantentEmployee Create(int Id, string Name, Enum Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
         {
             throw new NotImplementedException();
         }
 
-        public object Create(int Id, string Name, string Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
+        public object Create(int Id, string Name, Enum Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
         {
             var createNew = new PermantentEmployee()
             {
                 Id = Id,
                 Name = Name,
-                Contract = Contract,
+                Contract = ContractType.Permanent,
                 AnnualSalary = (decimal)AnnualSalary,
                 AnnualBonus = (decimal)AnnualBonus,
                 HoursWorked = (int)HoursWorked,
@@ -42,7 +42,7 @@ namespace PayCalc
             return createNew;
         }
 
-        public object Create(int Id, string Name, string Contract, int WeeksWorked, decimal DayRate)
+        public object Create(int Id, string Name, Enum Contract, int WeeksWorked, decimal DayRate)
         {
             throw new NotImplementedException();
         }
@@ -62,7 +62,7 @@ namespace PayCalc
             return _EmployeeList.FirstOrDefault(e => e.Id == Id);
         }
 
-        public PermantentEmployee Update(int Id, string Name, string Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public PermantentEmployee Update(int Id, string Name, Enum Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
         {
             throw new NotImplementedException();
         }
