@@ -49,7 +49,8 @@ namespace PayCalc
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            PermantentEmployee perm = _EmployeeList.FirstOrDefault(e => e.Id == Id);
+            _EmployeeList.Remove(perm); { return true; }
         }
 
         public IEnumerable<PermantentEmployee> GetAll()

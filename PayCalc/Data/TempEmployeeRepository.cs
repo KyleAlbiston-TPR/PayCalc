@@ -44,7 +44,8 @@ namespace PayCalc
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            TempEmployee temp = _TempEmployees.FirstOrDefault(e => e.Id == Id);
+            _TempEmployees.Remove(temp); { return true; }
         }
 
         public IEnumerable<TempEmployee> GetAll()

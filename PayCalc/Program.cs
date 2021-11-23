@@ -14,7 +14,7 @@ namespace PayCalc
             bool quitApp = false;
             do
             {
-                Console.WriteLine("\nWhat would you like to do today? \n1: Get staff info \n2: Generate pay report \n3: Add New Staff \n4: Exit");
+                Console.WriteLine("\nWhat would you like to do today? \n1: Get staff info \n2: Generate pay report \n3: Add New Staff \n4: Delete \n5: Exit");
                 var selectedOption = Console.ReadLine();
 
                 switch (selectedOption)
@@ -29,6 +29,9 @@ namespace PayCalc
                         addNewStaff();
                         break;
                     case "4":
+                        deleteStaff();
+                        break;
+                    case "5":
                         Environment.Exit(0);
                         break;
                     default:
@@ -37,6 +40,32 @@ namespace PayCalc
                 }
             }
             while (!quitApp);
+        }
+
+        private static void deleteStaff()
+        {
+            Console.Clear();
+            Console.WriteLine("\t\tTPR Pay calculator program v.1");
+            Console.WriteLine("\n\tEmployee Data Removal");
+            Console.WriteLine("Enter Staff ID: ");
+            int inputID = Convert.ToInt32(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Are you sure you want to delete this entry?");
+            Console.ResetColor();
+            Console.WriteLine(string.Concat(Temp.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+            Console.WriteLine("Y / N");
+            var yesno = Console.ReadLine();
+            if (yesno == "Y" || yesno == "y")
+            {
+                Console.WriteLine("Removing entry...");
+                Console.WriteLine(string.Concat(Temp.Delete(inputID)));
+                Console.WriteLine(string.Concat(Perm.Delete(inputID)));
+            }
+            else if (yesno == "N" || yesno == "n")
+            {
+                Console.WriteLine("No entry reomved");
+            }
         }
 
         private static void addNewStaff()
