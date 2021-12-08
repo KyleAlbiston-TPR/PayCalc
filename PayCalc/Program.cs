@@ -7,6 +7,7 @@ namespace PayCalc
     {
         private static IEmployeeRepository<TempEmployee> Temp = new TempEmployeeRepository();
         private static IEmployeeRepository<PermantentEmployee> Perm = new MockEmployeeRepository();
+        private static ICalculator Calculator = new Calculator();
 
         static void Main(string[] args)
         {
@@ -14,7 +15,7 @@ namespace PayCalc
             bool quitApp = false;
             do
             {
-                Console.WriteLine("\nWhat would you like to do today? \n1: Get staff info \n2: Generate pay report \n3: Add New Staff \n4: Delete \n5: Exit");
+                Console.WriteLine("\nWhat would you like to do today? \n1: Get staff info \n2: Generate pay report \n3: Add New Staff \n4: Update Staff Info \n5: Delete \n6: Exit");
                 var selectedOption = Console.ReadLine();
 
                 switch (selectedOption)
@@ -29,9 +30,12 @@ namespace PayCalc
                         addNewStaff();
                         break;
                     case "4":
-                        deleteStaff();
+                        updateStaff();
                         break;
                     case "5":
+                        deleteStaff();
+                        break;
+                    case "6":
                         Environment.Exit(0);
                         break;
                     default:
@@ -42,11 +46,39 @@ namespace PayCalc
             while (!quitApp);
         }
 
+        private static void updateStaff()
+        {
+            Console.Clear();
+            Console.WriteLine("\t\tTPR Pay calculator program v.1");
+            Console.WriteLine("\n\tEmployee Data Update");
+           
+            Console.WriteLine("Enter Staff ID: ");
+            int inputID = Convert.ToInt32(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Are you sure you want to update this entry?");
+            Console.ResetColor();
+            Console.WriteLine(string.Concat(Temp.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+            Console.WriteLine("Y / N");
+            var yesno = Console.ReadLine();
+            if (yesno == "Y" || yesno == "y")
+            {
+                Console.WriteLine("Select data to update");
+
+            }
+            else if (yesno == "N" || yesno == "n")
+            {
+                Console.WriteLine("No data updated");
+            }
+
+        }
+
         private static void deleteStaff()
         {
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine("\n\tEmployee Data Removal");
+
             Console.WriteLine("Enter Staff ID: ");
             int inputID = Convert.ToInt32(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Red;
@@ -137,19 +169,43 @@ namespace PayCalc
 
             Console.WriteLine("\nWhat would you like to do next? \n1: Calculate Total \n2: Calculate hourly wage \n3: Exit");
             var Response = Console.ReadLine();
+            if ((Perm.GetEmployee(inputID).Contract == ContractType.Permanent))
+            {
+                switch (Response)
+                {
+                    case "1":
+                        Console.WriteLine(string.Concat(Calculator.PermTotalPay(Perm.GetEmployee(inputID).AnnualSalary, Perm.GetEmployee(inputID).AnnualBonus)));
+                        break;
+                    case "2":
+                        Console.WriteLine(string.Concat(Calculator.PermHourlyRate(Perm.GetEmployee(inputID).AnnualSalary, Perm.GetEmployee(inputID).HoursWorked)));
+                        break;
+                    case "3":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid option");
+                        break;
+                }
+            }
+            else if ((Temp.GetEmployee(inputID).Contract == ContractType.Temporary))
+            {
+                switch (Response)
+                {
+                    case "1":
+                        Console.WriteLine(string.Concat(Calculator.TempTotalPay(Temp.GetEmployee(inputID).WeeksWorked, Perm.GetEmployee(inputID).HoursWorked)));
+                        break;
+                    case "2":
+                        Console.WriteLine(string.Concat(Calculator.TempHourlyRate(Temp.GetEmployee(inputID).DayRate)));
+                        break;
+                    case "3":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        Console.WriteLine("Please enter a valid option");
+                        break;
+                }
+            }
 
-            if (Response == "1")
-            {
-               
-            }
-            if (Response == "2")
-            {
-                
-            }
-            if (Response == "3")
-            {
-                Environment.Exit(0);
-            }
         }
 
     }
