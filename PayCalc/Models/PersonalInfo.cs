@@ -10,6 +10,6 @@ namespace PayCalc
         {
             public int Id { get; set; }
             public string Name { get; set; }
-            public ContractType Contract { get; internal set; }
+            public ContractType Contract { get; set; }
     }
 }

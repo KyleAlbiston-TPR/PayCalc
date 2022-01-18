@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    class TempEmployeeRepository : IEmployeeRepository<TempEmployee>
+    public class TempEmployeeRepository : IEmployeeRepository<TempEmployee>
     {
         public List<TempEmployee> _TempEmployees;
         public TempEmployeeRepository()
@@ -18,17 +18,17 @@ namespace PayCalc
             };
         }
 
-        public TempEmployee Create(int Id, string Name, Enum Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public TempEmployee Create(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
         {
             throw new NotImplementedException();
         }
 
-        public object Create(int Id, string Name, Enum Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
+        public object Create(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
         {
             throw new NotImplementedException();
         }
 
-        public object Create(int Id, string Name, Enum Contract, int WeeksWorked, decimal DayRate)
+        public object Create(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
         {
             var createNew = new TempEmployee()
             {
@@ -58,7 +58,12 @@ namespace PayCalc
             return _TempEmployees.FirstOrDefault(e => e.Id == Id);
         }
 
-        public TempEmployee Update(int Id, string Name, Enum Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public TempEmployee Update(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Update(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
         {
             throw new NotImplementedException();
         }

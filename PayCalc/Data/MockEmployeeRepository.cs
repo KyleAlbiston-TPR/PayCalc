@@ -7,7 +7,7 @@ using PayCalc;
 
 namespace PayCalc
 {
-    class MockEmployeeRepository : IEmployeeRepository<PermantentEmployee>
+    public class MockEmployeeRepository : IEmployeeRepository<PermantentEmployee>
     {
         public List<PermantentEmployee> _EmployeeList;
         public MockEmployeeRepository()
@@ -22,12 +22,12 @@ namespace PayCalc
 
         }
 
-        public PermantentEmployee Create(int Id, string Name, Enum Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public PermantentEmployee Create(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
         {
             throw new NotImplementedException();
         }
 
-        public object Create(int Id, string Name, Enum Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
+        public object Create(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
         {
             var createNew = new PermantentEmployee()
             {
@@ -42,7 +42,7 @@ namespace PayCalc
             return createNew;
         }
 
-        public object Create(int Id, string Name, Enum Contract, int WeeksWorked, decimal DayRate)
+        public object Create(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
         {
             throw new NotImplementedException();
         }
@@ -63,9 +63,20 @@ namespace PayCalc
             return _EmployeeList.FirstOrDefault(e => e.Id == Id);
         }
 
-        public PermantentEmployee Update(int Id, string Name, Enum Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public PermantentEmployee Update(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
         {
             throw new NotImplementedException();
+        }
+
+        public object Update(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
+        {
+            var update = GetEmployee(Id);
+            update.Name = Name;
+            update.Contract = (ContractType)Contract;
+            update.AnnualSalary = AnnualSalary;
+            update.AnnualBonus = AnnualBonus;
+            update.HoursWorked = HoursWorked;
+            return update;
         }
     }
 }
