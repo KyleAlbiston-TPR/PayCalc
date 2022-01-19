@@ -67,5 +67,15 @@ namespace PayCalc
         {
             throw new NotImplementedException();
         }
+
+        public object Update(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
+        {
+            var update = GetEmployee(Id);
+            update.Name = Name;
+            update.Contract = (ContractType)Contract;
+            update.WeeksWorked = WeeksWorked;
+            update.DayRate = DayRate;
+            return update;
+        }
     }
 }

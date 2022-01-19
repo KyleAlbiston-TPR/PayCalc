@@ -78,5 +78,10 @@ namespace PayCalc
             update.HoursWorked = HoursWorked;
             return update;
         }
+
+        public object Update(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
