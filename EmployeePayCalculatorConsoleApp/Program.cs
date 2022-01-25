@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Linq;
 
-namespace PayCalc
+namespace PayCalc //Multiple fixes need to be made since changes to the API... Research Factory method, or just hard code it
+    //into the program itself.
 {
     class Program
     {
         private static IEmployeeRepository<TempEmployee> Temp = new TempEmployeeRepository();
-        private static IEmployeeRepository<PermantentEmployee> Perm = new MockEmployeeRepository();
-        private static ICalculator Calculator = new Calculator();
+        private static IEmployeeRepository<PermanentEmployee> Perm = new MockEmployeeRepository();
+        private static ICalculator<PermanentEmployee> Calculator = new Calculator();
 
         static void Main(string[] args)
         {
@@ -148,7 +149,7 @@ namespace PayCalc
             var Contract = Console.ReadLine();
             if (Contract == "P" || Contract == "p")
             {
-                PermantentEmployee employee = new PermantentEmployee();
+                PermanentEmployee employee = new PermanentEmployee();
                 Console.WriteLine("Staff ID: ");
                 employee.Id = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Staff Name: ");
@@ -187,7 +188,7 @@ namespace PayCalc
 
         public static void generateReport()
         {
-            PermantentEmployee employee = new PermantentEmployee();
+            PermanentEmployee employee = new PermanentEmployee();
             
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");

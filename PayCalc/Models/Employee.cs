@@ -7,7 +7,7 @@ using PayCalc;
 
 namespace PayCalc
 {
-    public class PermantentEmployee : PersonalInfo
+    public class PermanentEmployee : PersonalInfo
     {
         public decimal AnnualSalary { get; set; }
         public decimal AnnualBonus { get; set; }

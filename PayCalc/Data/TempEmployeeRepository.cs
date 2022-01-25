@@ -18,28 +18,10 @@ namespace PayCalc
             };
         }
 
-        public TempEmployee Create(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public TempEmployee Create(TempEmployee Employee)
         {
-            throw new NotImplementedException();
-        }
-
-        public object Create(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Create(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
-        {
-            var createNew = new TempEmployee()
-            {
-                Id = Id,
-                Name = Name,
-                Contract = ContractType.Temporary,
-                WeeksWorked = (int)WeeksWorked,
-                DayRate = (decimal)DayRate,
-            };
-            _TempEmployees.Add(createNew);
-            return createNew;
+            _TempEmployees.Add(Employee);
+            return Employee;
         }
 
         public bool Delete(int Id)
@@ -58,24 +40,20 @@ namespace PayCalc
             return _TempEmployees.FirstOrDefault(e => e.Id == Id);
         }
 
-        public TempEmployee Update(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public TempEmployee Update(TempEmployee Employee)
         {
-            throw new NotImplementedException();
-        }
-
-        public object Update(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
-        {
-            throw new NotImplementedException();
-        }
-
-        public object Update(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
-        {
-            var update = GetEmployee(Id);
-            update.Name = Name;
-            update.Contract = (ContractType)Contract;
-            update.WeeksWorked = WeeksWorked;
-            update.DayRate = DayRate;
-            return update;
+            if (Employee == null)
+            {
+                throw new ArgumentNullException(nameof(Employee));
+            }
+            int index = _TempEmployees.FindIndex(p => p.Id == Employee.Id);
+            if (index == -1)
+            {
+                return null;
+            }
+            _TempEmployees.RemoveAt(index);
+            _TempEmployees.Add(Employee);
+            return Employee;
         }
     }
 }

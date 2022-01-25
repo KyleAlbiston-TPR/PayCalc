@@ -5,8 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddSingleton<IEmployeeRepository<TempEmployee>, TempEmployeeRepository>();
-builder.Services.AddSingleton<IEmployeeRepository<PermantentEmployee>, MockEmployeeRepository>();
-builder.Services.AddSingleton<ICalculator, Calculator>();
+builder.Services.AddSingleton<IEmployeeRepository<PermanentEmployee>, MockEmployeeRepository>();
+builder.Services.AddSingleton<ICalculator<PermanentEmployee>, Calculator>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

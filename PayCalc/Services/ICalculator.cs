@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-    public interface ICalculator
+    public interface ICalculator<T> //not working as intended, still needs to hold the temp calcs. 
     {
         decimal PermTotalPay(decimal AnnualSalary, decimal AnnualBonus);
 
         decimal PermHourlyRate(decimal AnnualSalary, decimal HoursWorked);
-
-        decimal TempTotalPay(int WeeksWorked, decimal DayRate);
-
-        decimal TempHourlyRate(decimal DayRate);
     }
 }

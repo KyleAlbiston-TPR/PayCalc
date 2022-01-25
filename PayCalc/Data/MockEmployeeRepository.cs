@@ -7,81 +7,58 @@ using PayCalc;
 
 namespace PayCalc
 {
-    public class MockEmployeeRepository : IEmployeeRepository<PermantentEmployee>
+    public class MockEmployeeRepository : IEmployeeRepository<PermanentEmployee>
     {
-        public List<PermantentEmployee> _EmployeeList;
+        public List<PermanentEmployee> _EmployeeList;
         public MockEmployeeRepository()
         {
-            _EmployeeList = new List<PermantentEmployee>()
+            _EmployeeList = new List<PermanentEmployee>()
             {
-                new PermantentEmployee()
+                new PermanentEmployee()
                 { Id = 1, Name = "Kyle Albiston", Contract = ContractType.Permanent , AnnualSalary = 15000, AnnualBonus = 4000, HoursWorked = 1820 },
-                new PermantentEmployee()
+                new PermanentEmployee()
                 { Id = 2, Name = "Mark Hammerson", Contract = ContractType.Permanent, AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
             };
 
         }
 
-        public PermantentEmployee Create(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public PermanentEmployee Create(PermanentEmployee Employee)
         {
-            throw new NotImplementedException();
-        }
-
-        public object Create(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
-        {
-            var createNew = new PermantentEmployee()
-            {
-                Id = Id,
-                Name = Name,
-                Contract = ContractType.Permanent,
-                AnnualSalary = (decimal)AnnualSalary,
-                AnnualBonus = (decimal)AnnualBonus,
-                HoursWorked = (int)HoursWorked,
-            };
-            _EmployeeList.Add(createNew);
-            return createNew;
-        }
-
-        public object Create(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
-        {
-            throw new NotImplementedException();
+            _EmployeeList.Add(Employee);
+            return Employee;
         }
 
         public bool Delete(int Id)
         {
-            PermantentEmployee perm = _EmployeeList.FirstOrDefault(e => e.Id == Id);
-            _EmployeeList.Remove(perm); { return true; }
+            PermanentEmployee perm = _EmployeeList.FirstOrDefault(e => e.Id == Id);
+            if (_EmployeeList.Remove(perm)) ;
+            { return true; }
         }
 
-        public IEnumerable<PermantentEmployee> GetAll()
+        public IEnumerable<PermanentEmployee> GetAll()
         {
             return (_EmployeeList);
         }
 
-        public PermantentEmployee GetEmployee(int Id)
+        public PermanentEmployee GetEmployee(int Id)
         {
             return _EmployeeList.FirstOrDefault(e => e.Id == Id);
         }
 
-        public PermantentEmployee Update(int Id, string Name, ContractType Contract, decimal? AnnualSalary, decimal? AnnualBonus, int? HoursWorked, int? WeeksWorked, decimal? DayRate)
+        public PermanentEmployee Update(PermanentEmployee Employee)
         {
-            throw new NotImplementedException();
-        }
-
-        public object Update(int Id, string Name, ContractType Contract, decimal AnnualSalary, decimal AnnualBonus, int HoursWorked)
-        {
-            var update = GetEmployee(Id);
-            update.Name = Name;
-            update.Contract = (ContractType)Contract;
-            update.AnnualSalary = AnnualSalary;
-            update.AnnualBonus = AnnualBonus;
-            update.HoursWorked = HoursWorked;
-            return update;
-        }
-
-        public object Update(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
-        {
-            throw new NotImplementedException();
+            if (Employee == null)
+            { 
+                throw new ArgumentNullException(nameof(Employee));
+            }
+            int index = _EmployeeList.FindIndex(p => p.Id == Employee.Id);
+            if (index == -1)
+            {
+                return null;
+            }
+            _EmployeeList.RemoveAt(index);
+            _EmployeeList.Add(Employee);
+            return Employee;
         }
     }
 }

@@ -8,51 +8,50 @@ namespace EmployeePayCalculatorAPI.Controllers
     [ApiController]
     public class TempEmployeeController : ControllerBase
     {
-        private TempEmployeeRepository Temp;
-        //private Calculator Calculator;
+        private readonly IEmployeeRepository<TempEmployee> Temp;
 
         public TempEmployeeController(IEmployeeRepository<TempEmployee> temp)
         {
-            Temp = (TempEmployeeRepository)temp;
+            Temp = temp;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<TempEmployee>>> Get()
         {
-            return Ok(string.Concat(Temp.GetAll()));
+            return Ok(Temp.GetAll());
         }
 
         [HttpGet("{Id}")]
         public async Task<ActionResult<TempEmployee>> Get(int Id)
         {
-            var getOne = (string.Concat(Temp.GetEmployee(Id)));
+            var getOne = (Temp.GetEmployee(Id));
             if (Temp.GetEmployee(Id) == null)
                 return BadRequest("Employee not found");
             else
                 return Ok(getOne);
         }
         [HttpPost]
-        public async Task<ActionResult<TempEmployee>> PutNewStaff(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
+        public async Task<ActionResult<TempEmployee>> PostNewStaff(TempEmployee TempAdd)
         {
-            var response = (string.Concat(Temp.Create(Id, Name, Contract, WeeksWorked, DayRate)));
+            var response = Temp.Create(TempAdd);
             if (response == null)
                 return BadRequest("Employee not found");
             else
                 return Ok(response);
         }
         [HttpPut("{Id}")]
-        public async Task<ActionResult<List<TempEmployee>>> Update(int Id, string Name, ContractType Contract, int WeeksWorked, decimal DayRate)
+        public async Task<ActionResult<List<TempEmployee>>> Update(TempEmployee TempUpdate)
         {
-            var updateTemp = (string.Concat(Temp.Update(Id, Name, Contract, WeeksWorked, DayRate)));
-            if (Temp.GetEmployee(Id) == null)
+            var response = Temp.Update(TempUpdate);
+            if (response == null)
                 return BadRequest("Employee not found");
             else
-                return Ok(updateTemp);
+                return Ok(response);
         }
         [HttpDelete("{Id}")]
         public async Task<ActionResult<TempEmployee>> Delete(int Id)
         {
-            var deleteTemp = (string.Concat(Temp.Delete(Id)));
+            var deleteTemp = (Temp.Delete(Id));
             if (Temp.GetEmployee(Id) == null)
                 return BadRequest("Employee not found");
             else
