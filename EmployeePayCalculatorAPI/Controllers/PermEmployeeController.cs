@@ -9,11 +9,11 @@ namespace EmployeePayCalculatorAPI.Controllers
     public class PermEmployeeController : ControllerBase
     {
         private readonly IEmployeeRepository<PermanentEmployee> Perm;
-        private readonly ICalculator<PermanentEmployee> Calculator;
+        private readonly ICalculator<PermanentEmployee> Calc;
         public PermEmployeeController(IEmployeeRepository<PermanentEmployee> perm, ICalculator<PermanentEmployee> calc)
         {
             Perm = perm;
-            Calculator = calc;
+            Calc = calc;
         }
 
         [HttpGet]
@@ -59,15 +59,15 @@ namespace EmployeePayCalculatorAPI.Controllers
             return NoContent();
         }
         [HttpPost("{Id}")]
-        public async Task<ActionResult<PermanentEmployee>> TotalPay(int Id, decimal AnnualSalary, decimal AnnualBonus) 
+        public async Task<ActionResult<PermanentEmployee>> TotalPay(int Id) 
             //not working as intended but is a start of something, still messing around with anything to do with calc
         {
-            var total = Calculator.PermTotalPay(AnnualSalary, AnnualBonus);
             if (Perm.GetEmployee(Id) == null)
                 return BadRequest("Employee not found");
-            else       
-            return Ok(total);
-                
+            else
+                return Ok(Calc.PermTotalPay(Perm.GetEmployee(Id).AnnualSalary, Perm.GetEmployee(Id).AnnualBonus));
+
+
         }
     }
 }

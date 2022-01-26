@@ -232,7 +232,7 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
                 switch (Response)
                 {
                     case "1":
-                        Console.WriteLine(string.Concat(Calculator.TempTotalPay(Temp.GetEmployee(inputID).WeeksWorked, Perm.GetEmployee(inputID).HoursWorked)));
+                        Console.WriteLine(string.Concat(Calculator.TempTotalPay(Temp.GetEmployee(inputID).WeeksWorked, Temp.GetEmployee(inputID).DayRate)));
                         break;
                     case "2":
                         Console.WriteLine(string.Concat(Calculator.TempHourlyRate(Temp.GetEmployee(inputID).DayRate)));
