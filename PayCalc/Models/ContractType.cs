@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace PayCalc
 {
-        public enum ContractType { Permanent, Temporary, Contract }
+    public enum ContractType { Permanent, Temporary }
 }
