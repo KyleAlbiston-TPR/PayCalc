@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using PayCalc.Services;
 
-namespace PayCalc //Multiple fixes need to be made since changes to the API... Research Factory method, or just hard code it
-    //into the program itself.
+namespace PayCalc
 {
     class Program
     {
-        private static IEmployeeRepository<TempEmployee> Temp = new TempEmployeeRepository();
-        private static IEmployeeRepository<PermanentEmployee> Perm = new MockEmployeeRepository();
-        private static ICalculator<PermanentEmployee> Calculator = new Calculator();
+        private static IEmployeeRepository<TempEmployee> _temp = new TempEmployeeRepository();
+        private static IEmployeeRepository<PermanentEmployee> _perm = new MockEmployeeRepository();
+        private static IPermCalculator _permCalc = new PermCalculator();
+        private static ITempCalculator _tempCalc = new TempCalculator();
 
         static void Main(string[] args)
         {
@@ -52,24 +51,24 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine("\n\tEmployee Data Update");
-           
+
             Console.WriteLine("Enter Staff ID: ");
             int inputID = Convert.ToInt32(Console.ReadLine());
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Are you sure you want to update this entry?");
             Console.ResetColor();
-            Console.WriteLine(string.Concat(Temp.GetEmployee(inputID)));
-            Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(_temp.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(_perm.GetEmployee(inputID)));
             Console.WriteLine("Y / N");
             var yesno = Console.ReadLine();
             if (yesno == "Y" || yesno == "y")
             {
                 Console.Clear();
-                Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+                Console.WriteLine(string.Concat(_perm.GetEmployee(inputID)));
                 Console.WriteLine("Select data to update");
                 Console.WriteLine("1: StaffID   2: Name   3: Contract   4: AnnualSalary   5: AnnualBonus   6: HoursWorked");
                 var input = Console.ReadLine();
-                var currentInfo = Perm.GetEmployee(inputID);
+                var currentInfo = _perm.GetEmployee(inputID);
                 switch (input)
                 {
                     case "1":
@@ -78,33 +77,41 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
                     case "2":
                         Console.WriteLine("Enter new Name: ");
                         var UName = Console.ReadLine();
-                        Perm.Update(currentInfo.Id, UName, currentInfo.Contract, currentInfo.AnnualSalary, currentInfo.AnnualBonus, currentInfo.HoursWorked); 
+                        _perm.GetEmployee(inputID).Name = UName;
+                        _perm.Update(currentInfo);
                         break;
                     case "3":
                         Console.WriteLine("Enter new Contract: ");
                         var UContract = Console.ReadLine();
-                      //  Perm.Update(currentInfo.Id, currentInfo.Name, UContract, currentInfo.AnnualSalary, currentInfo.AnnualBonus, currentInfo.HoursWorked);
+                        if (UContract == "P" || UContract == "p")
+                        {_perm.GetEmployee(inputID).Contract = ContractType.Permanent;}
+                        else if (UContract == "T" || UContract == "t")
+                        { _perm.GetEmployee(inputID).Contract = ContractType.Temporary;}
+                        _perm.Update(currentInfo);
                         break;
                     case "4":
                         Console.WriteLine("Enter new Annual Salary: ");
                         var UAnnualSalary = Convert.ToInt32(Console.ReadLine());
-                        Perm.Update(currentInfo.Id, currentInfo.Name, currentInfo.Contract, UAnnualSalary, currentInfo.AnnualBonus, currentInfo.HoursWorked);
+                        _perm.GetEmployee(inputID).AnnualSalary = UAnnualSalary;
+                        _perm.Update(currentInfo); 
                         break;
                     case "5":
                         Console.WriteLine("Enter new Bonus: ");
                         var UAnnualBonus = Convert.ToInt32(Console.ReadLine());
-                        Perm.Update(currentInfo.Id, currentInfo.Name, currentInfo.Contract, currentInfo.AnnualSalary, UAnnualBonus, currentInfo.HoursWorked);
+                        _perm.GetEmployee(inputID).AnnualBonus = UAnnualBonus;
+                        _perm.Update(currentInfo);
                         break;
                     case "6":
                         Console.WriteLine("Enter new Hours Worked: ");
                         var UHoursWorked = Convert.ToInt32(Console.ReadLine());
-                        Perm.Update(currentInfo.Id, currentInfo.Name, currentInfo.Contract, currentInfo.AnnualSalary, currentInfo.AnnualBonus, UHoursWorked);
+                        _perm.GetEmployee(inputID).HoursWorked = UHoursWorked;
+                        _perm.Update(currentInfo);
                         break;
                     default:
                         Console.WriteLine("Invalid option");
                         break;
                 }
-                Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+                Console.WriteLine(string.Concat(_perm.GetEmployee(inputID)));
             }
             else if (yesno == "N" || yesno == "n")
             {
@@ -124,15 +131,15 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Are you sure you want to delete this entry?");
             Console.ResetColor();
-            Console.WriteLine(string.Concat(Temp.GetEmployee(inputID)));
-            Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(_temp.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(_perm.GetEmployee(inputID)));
             Console.WriteLine("Y / N");
             var yesno = Console.ReadLine();
             if (yesno == "Y" || yesno == "y")
             {
                 Console.WriteLine("Removing entry...");
-                Console.WriteLine(string.Concat(Temp.Delete(inputID)));
-                Console.WriteLine(string.Concat(Perm.Delete(inputID)));
+                Console.WriteLine(string.Concat(_temp.Delete(inputID)));
+                Console.WriteLine(string.Concat(_perm.Delete(inputID)));
             }
             else if (yesno == "N" || yesno == "n")
             {
@@ -150,8 +157,7 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
             if (Contract == "P" || Contract == "p")
             {
                 PermanentEmployee employee = new PermanentEmployee();
-                Console.WriteLine("Staff ID: ");
-                employee.Id = Convert.ToInt32(Console.ReadLine());
+                employee.Id = new Random().Next(0, 100);
                 Console.WriteLine("Staff Name: ");
                 employee.Name = Console.ReadLine();
                 employee.Contract = ContractType.Permanent;
@@ -162,8 +168,10 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
                 Console.WriteLine("Hours Worked: ");
                 employee.HoursWorked = Convert.ToInt32(Console.ReadLine());
                 Console.Clear();
+
                 Console.WriteLine("\n \tNew Employee Data: \n");
-                Console.WriteLine(string.Concat(Perm.Create(employee.Id,employee.Name,employee.Contract, employee.AnnualSalary, employee.AnnualBonus,  employee.HoursWorked)));
+
+                Console.WriteLine(_perm.Create(employee));             
             }
             else if (Contract == "T" || Contract == "t")
             {
@@ -179,23 +187,23 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
                 tempEmployee.DayRate = Convert.ToDecimal(Console.ReadLine());
                 Console.Clear();
                 Console.WriteLine("\n \tNew Employee Data: \n");
-                Console.WriteLine(string.Concat(Temp.Create(Id: tempEmployee.Id, Name: tempEmployee.Name, Contract: tempEmployee.Contract, WeeksWorked: tempEmployee.WeeksWorked, DayRate: tempEmployee.DayRate)));
 
+                Console.WriteLine(_temp.Create(tempEmployee));
             }
-            else { Console.WriteLine("Invalid Input");}
+            else { Console.WriteLine("Invalid Input"); }
 
         }
 
         public static void generateReport()
         {
             PermanentEmployee employee = new PermanentEmployee();
-            
+
             Console.Clear();
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine("\n-----------------------Permanent Staff-----------------------\n");
-            Console.WriteLine(string.Concat(Perm.GetAll()));
+            Console.WriteLine(string.Concat(_perm.GetAll()));
             Console.WriteLine("\n-----------------------Temporary Staff-----------------------\n");
-            Console.WriteLine(string.Concat(Temp.GetAll()));
+            Console.WriteLine(string.Concat(_temp.GetAll()));
         }
 
         public static void generateStaffPay()
@@ -204,20 +212,20 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
             Console.WriteLine("\t\tTPR Pay calculator program v.1");
             Console.WriteLine(Environment.NewLine + "Enter ID: ");
             int inputID = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine(string.Concat(Perm.GetEmployee(inputID)));
-            Console.WriteLine(string.Concat(Temp.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(_perm.GetEmployee(inputID)));
+            Console.WriteLine(string.Concat(_temp.GetEmployee(inputID)));
 
             Console.WriteLine("\nWhat would you like to do next? \n1: Calculate Total \n2: Calculate hourly wage \n3: Exit");
             var Response = Console.ReadLine();
-            if ((Perm.GetEmployee(inputID).Contract == ContractType.Permanent))
+            if ((_perm.GetEmployee(inputID).Contract == ContractType.Permanent))
             {
                 switch (Response)
                 {
                     case "1":
-                        Console.WriteLine(string.Concat(Calculator.PermTotalPay(Perm.GetEmployee(inputID).AnnualSalary, Perm.GetEmployee(inputID).AnnualBonus)));
+                        Console.WriteLine(string.Concat(_permCalc.TotalPay(_perm.GetEmployee(inputID).AnnualSalary, _perm.GetEmployee(inputID).AnnualBonus)));
                         break;
                     case "2":
-                        Console.WriteLine(string.Concat(Calculator.PermHourlyRate(Perm.GetEmployee(inputID).AnnualSalary, Perm.GetEmployee(inputID).HoursWorked)));
+                        Console.WriteLine(string.Concat(_permCalc.HourlyRate(_perm.GetEmployee(inputID).AnnualSalary, _perm.GetEmployee(inputID).HoursWorked)));
                         break;
                     case "3":
                         Environment.Exit(0);
@@ -227,15 +235,15 @@ namespace PayCalc //Multiple fixes need to be made since changes to the API... R
                         break;
                 }
             }
-            else if ((Temp.GetEmployee(inputID).Contract == ContractType.Temporary))
+            else if ((_temp.GetEmployee(inputID).Contract == ContractType.Temporary))
             {
                 switch (Response)
                 {
                     case "1":
-                        Console.WriteLine(string.Concat(Calculator.TempTotalPay(Temp.GetEmployee(inputID).WeeksWorked, Temp.GetEmployee(inputID).DayRate)));
+                        Console.WriteLine(string.Concat(_tempCalc.TotalPay(_temp.GetEmployee(inputID).WeeksWorked, _temp.GetEmployee(inputID).DayRate)));
                         break;
                     case "2":
-                        Console.WriteLine(string.Concat(Calculator.TempHourlyRate(Temp.GetEmployee(inputID).DayRate)));
+                        Console.WriteLine(string.Concat(_tempCalc.HourlyRate(_temp.GetEmployee(inputID).DayRate)));
                         break;
                     case "3":
                         Environment.Exit(0);

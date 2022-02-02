@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PayCalc;
+using PayCalc.Services;
 
 namespace EmployeePayCalculatorAPI.Controllers
 {
@@ -8,54 +9,60 @@ namespace EmployeePayCalculatorAPI.Controllers
     [ApiController]
     public class TempEmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository<TempEmployee> Temp;
+        private readonly IEmployeeRepository<TempEmployee> _temp;
+        private readonly ITempCalculator _calc;
 
-        public TempEmployeeController(IEmployeeRepository<TempEmployee> temp)
+        public TempEmployeeController(IEmployeeRepository<TempEmployee> temp, ITempCalculator calc)
         {
-            Temp = temp;
+            _temp = temp;
+            _calc = calc;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<TempEmployee>>> Get()
         {
-            return Ok(Temp.GetAll());
+            return Ok(_temp.GetAll());
         }
 
         [HttpGet("{Id}")]
         public async Task<ActionResult<TempEmployee>> Get(int Id)
         {
-            var getOne = (Temp.GetEmployee(Id));
-            if (Temp.GetEmployee(Id) == null)
-                return BadRequest("Employee not found");
+            var getOne = (_temp.GetEmployee(Id));
+            if (_temp.GetEmployee(Id) == null)
+                return NotFound("Employee not found");
             else
                 return Ok(getOne);
         }
         [HttpPost]
         public async Task<ActionResult<TempEmployee>> PostNewStaff(TempEmployee TempAdd)
         {
-            var response = Temp.Create(TempAdd);
+            TempAdd.TotalPay = _calc.TotalPay(TempAdd.WeeksWorked, TempAdd.DayRate);
+            TempAdd.HourlyPay = _calc.HourlyRate(TempAdd.DayRate);
+            var response = _temp.Create(TempAdd);
             if (response == null)
-                return BadRequest("Employee not found");
+                return NotFound("Employee not found");
             else
-                return Ok(response);
+                return StatusCode(201, response);
         }
         [HttpPut("{Id}")]
         public async Task<ActionResult<List<TempEmployee>>> Update(TempEmployee TempUpdate)
         {
-            var response = Temp.Update(TempUpdate);
+            TempUpdate.TotalPay = _calc.TotalPay(TempUpdate.WeeksWorked, TempUpdate.DayRate);
+            TempUpdate.HourlyPay = _calc.HourlyRate(TempUpdate.DayRate);
+            var response = _temp.Update(TempUpdate);
             if (response == null)
-                return BadRequest("Employee not found");
+                return NotFound("Employee not found");
             else
                 return Ok(response);
         }
         [HttpDelete("{Id}")]
         public async Task<ActionResult<TempEmployee>> Delete(int Id)
         {
-            var deleteTemp = (Temp.Delete(Id));
-            if (Temp.GetEmployee(Id) == null)
-                return BadRequest("Employee not found");
+            if (_temp.GetEmployee(Id) == null)
+                return NotFound("Employee not found");
             else
-                return Ok(deleteTemp);
+                _temp.Delete(Id);
+            return NoContent();
         }
     }
 }

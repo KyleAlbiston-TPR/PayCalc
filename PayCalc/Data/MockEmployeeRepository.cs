@@ -19,12 +19,12 @@ namespace PayCalc
                 new PermanentEmployee()
                 { Id = 2, Name = "Mark Hammerson", Contract = ContractType.Permanent, AnnualSalary = 18000, AnnualBonus = 2500, HoursWorked = 2000 }
             };
-
         }
 
         public PermanentEmployee Create(PermanentEmployee Employee)
         {
             _EmployeeList.Add(Employee);
+            Employee.Id = new Random().Next(0,100);
             return Employee;
         }
 

@@ -14,13 +14,14 @@ namespace PayCalc
             _TempEmployees = new List<TempEmployee>()
             {
                 new TempEmployee()
-                { Id = 3, Name = "Clare Jones", Contract = ContractType.Temporary, WeeksWorked = 40, DayRate = 350 }
+                { Id = new Random().Next(0,100), Name = "Clare Jones", Contract = ContractType.Temporary, WeeksWorked = 40, DayRate = 350 }
             };
         }
 
         public TempEmployee Create(TempEmployee Employee)
         {
             _TempEmployees.Add(Employee);
+            Employee.Id = new Random().Next(0, 100);
             return Employee;
         }
 

@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PayCalc
+namespace PayCalc.Services
 {
-    public class Calculator : ICalculator<PermanentEmployee>
+    public class PermCalculator : IPermCalculator
     {
-        public decimal PermHourlyRate(decimal AnnualSalary, decimal HoursWorked)
+        public decimal HourlyRate(decimal AnnualSalary, decimal HoursWorked)
         {
             return AnnualSalary / HoursWorked;
         }
 
-        public decimal PermTotalPay(decimal AnnualSalary, decimal AnnualBonus)
+        public decimal TotalPay(decimal AnnualSalary, decimal AnnualBonus)
         {
             return (AnnualSalary + AnnualBonus);
         }

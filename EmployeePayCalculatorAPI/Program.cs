@@ -1,4 +1,5 @@
 using PayCalc;
+using PayCalc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<IEmployeeRepository<TempEmployee>, TempEmployeeRepository>();
 builder.Services.AddSingleton<IEmployeeRepository<PermanentEmployee>, MockEmployeeRepository>();
-builder.Services.AddSingleton<ICalculator<PermanentEmployee>, Calculator>();
+builder.Services.AddSingleton<IPermCalculator, PermCalculator>();
+builder.Services.AddSingleton<ITempCalculator, TempCalculator>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

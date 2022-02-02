@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PayCalc;
+using PayCalc.Services;
 
 namespace EmployeePayCalculatorAPI.Controllers
 {
@@ -8,66 +9,59 @@ namespace EmployeePayCalculatorAPI.Controllers
     [ApiController]
     public class PermEmployeeController : ControllerBase
     {
-        private readonly IEmployeeRepository<PermanentEmployee> Perm;
-        private readonly ICalculator<PermanentEmployee> Calc;
-        public PermEmployeeController(IEmployeeRepository<PermanentEmployee> perm, ICalculator<PermanentEmployee> calc)
+        private readonly IEmployeeRepository<PermanentEmployee> _perm;
+        private readonly IPermCalculator _calc;
+        public PermEmployeeController(IEmployeeRepository<PermanentEmployee> perm, IPermCalculator calc)
         {
-            Perm = perm;
-            Calc = calc;
+            _perm = perm;
+            _calc = calc;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<PermanentEmployee>>> Get()
         {
-            return Ok(Perm.GetAll());
+            return Ok(_perm.GetAll());
         }
 
         [HttpGet("{Id}")]
         public async Task<ActionResult<PermanentEmployee>> Get(int Id)
         {
-            var getOne = (Perm.GetEmployee(Id));
-            if (Perm.GetEmployee(Id) == null)
-                return BadRequest("Employee not found");
+            var getOne = (_perm.GetEmployee(Id));
+            if (_perm.GetEmployee(Id) == null)
+                return NotFound("Employee not found");
             else
                 return Ok(getOne);
         }
         [HttpPost]
         public async Task<ActionResult<PermanentEmployee>> PostNewStaff(PermanentEmployee PermAdd)
         {
-            var response = Perm.Create(PermAdd);
+            PermAdd.TotalPay = _calc.TotalPay(PermAdd.AnnualSalary, PermAdd.AnnualBonus);
+            PermAdd.HourlyPay = _calc.HourlyRate(PermAdd.AnnualSalary, PermAdd.HoursWorked);
+            var response = _perm.Create(PermAdd);
             if (response == null)
-                return BadRequest("Employee not found");
+                return NotFound("Employee not found");
             else
-                return StatusCode(201, response);
+                return StatusCode(201,response);
         }
         [HttpPut("{Id}")]
         public async Task<ActionResult<List<PermanentEmployee>>> Update(PermanentEmployee PermUpdate)
         {
-            var response = Perm.Update(PermUpdate);
+            PermUpdate.TotalPay = _calc.TotalPay(PermUpdate.AnnualSalary, PermUpdate.AnnualBonus);
+            PermUpdate.HourlyPay = _calc.HourlyRate(PermUpdate.AnnualSalary, PermUpdate.HoursWorked);
+            var response = _perm.Update(PermUpdate);
             if (response == null)
-                return BadRequest("Employee not found");
+                return NotFound("Employee not found");
             else
                 return Ok(response);
         }
         [HttpDelete("{Id}")]
         public async Task<ActionResult<PermanentEmployee>> Delete(int Id)
         {
-            if (Perm.GetEmployee(Id) == null)
-                return BadRequest("Employee not found");
+            if (_perm.GetEmployee(Id) == null)
+                return NotFound("Employee not found");
             else
-                Perm.Delete(Id);
+                _perm.Delete(Id);
             return NoContent();
-        }
-        [HttpPost("{Id}")]
-        public async Task<ActionResult<PermanentEmployee>> TotalPay(int Id) 
-            //not working as intended but is a start of something, still messing around with anything to do with calc
-        {
-            if (Perm.GetEmployee(Id) == null)
-                return BadRequest("Employee not found");
-            else
-                return Ok(Calc.PermTotalPay(Perm.GetEmployee(Id).AnnualSalary, Perm.GetEmployee(Id).AnnualBonus));
-
-
         }
     }
 }
